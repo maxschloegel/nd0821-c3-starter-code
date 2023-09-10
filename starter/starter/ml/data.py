@@ -1,3 +1,5 @@
+import pathlib
+
 import numpy as np
 from sklearn.preprocessing import LabelBinarizer, OneHotEncoder
 
@@ -49,7 +51,6 @@ def process_data(
         X = X.drop([label], axis=1)
     else:
         y = np.array([])
-
     X_categorical = X[categorical_features].values
     X_continuous = X.drop(*[categorical_features], axis=1)
 
@@ -68,3 +69,19 @@ def process_data(
 
     X = np.concatenate([X_continuous, X_categorical], axis=1)
     return X, y, encoder, lb
+
+
+def clean_data(data):
+    print("Not Implemented yet!")
+    return data
+
+
+def load_data_path():
+    """Loads data path
+
+    It might be helpful to use hydra (or something else)
+    to get the root directory of this project.
+    With this, we can easily define the path to the dataset.
+    """
+    data_path = pathlib.Path("data") / "census.csv"
+    return data_path
