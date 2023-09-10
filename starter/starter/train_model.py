@@ -6,7 +6,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 
 from ml.data import clean_data, load_data_path, process_data
-from ml.model import (save_encoder, save_model, train_model,
+from ml.model import (save_encoder, save_model, save_lb, train_model,
                       compute_model_metrics, inference,
                       compute_model_metrics_for_feature_slice)
 from ml.config import cat_features, label
@@ -57,3 +57,7 @@ save_model(model, model_path)
 # Save encoder
 encoder_path = pathlib.Path("model") / "one_hot_encoder.pkl"
 save_encoder(encoder, encoder_path)
+
+# Save labelbinarizer
+lb_path = pathlib.Path("model") / "lb.pkl"
+save_lb(lb, lb_path)

@@ -85,6 +85,12 @@ def compute_model_metrics_for_feature_slice(model, df, categorical_features, lab
     return metric_dict
 
 
+def inference_on_df(model, df, categorical_features, encoder, lb):
+    X, y, _, _ = process_data(df, categorical_features=categorical_features, label=label, training=False,
+                        encoder=encoder, lb=lb)
+    predictions = inference(model, X)
+    return predictions
+
 
 def inference(model, X):
     """ Run model inferences and return the predictions.
@@ -130,3 +136,8 @@ def save_encoder(encoder, path):
     """
     with open(path, "wb") as f:
         pickle.dump(encoder, f)
+
+
+def save_lb(lb, path):
+    with open(path, "wb") as f:
+        pickle.dump(lb, f)
