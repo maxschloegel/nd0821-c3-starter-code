@@ -1,5 +1,4 @@
 # Script to train machine learning model.
-import os
 import pathlib
 
 import pandas as pd
@@ -21,7 +20,7 @@ data = pd.read_csv(data_path)
 # Clean data (remove nan values or weird entries such as "?")
 data = clean_data(data)
 
-# Optional enhancement, use K-fold cross validation instead of a train-test split.
+# Optional: use K-fold cross validation instead of a train-test split.
 train, test = train_test_split(data, test_size=0.20)
 
 # Proces the test data with the process_data function.
@@ -29,7 +28,8 @@ X_train, y_train, encoder, lb = process_data(
     train, categorical_features=cat_features, label=label, training=True
 )
 X_test, y_test, encoder, lb = process_data(
-    test, categorical_features=cat_features, label=label, training=False, encoder=encoder, lb=lb
+    test, categorical_features=cat_features,
+    label=label, training=False, encoder=encoder, lb=lb
 )
 
 # Train and save a model.
@@ -41,15 +41,16 @@ print(f"Test Metrics - ({len(X_test)} samples used)")
 print(compute_model_metrics(inference(model, X_test), y_test))
 
 print("Slice Metrics on Test data for Column 'sex'")
-print(compute_model_metrics_for_feature_slice(model=model,
-                                              df=test,
-                                              categorical_features=cat_features,
-                                              label=label,
-                                              slice_column='sex',
-                                              encoder=encoder,
-                                              lb=lb))
+print(compute_model_metrics_for_feature_slice(
+        model=model,
+        df=test,
+        categorical_features=cat_features,
+        label=label,
+        slice_column='sex',
+        encoder=encoder,
+        lb=lb)
+      )
 
-#import pdb;pdb.set_trace()
 # Save model
 model_path = pathlib.Path("model") / "classifier.pkl"
 save_model(model, model_path)

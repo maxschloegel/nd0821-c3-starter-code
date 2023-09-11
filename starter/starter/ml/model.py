@@ -4,7 +4,7 @@ from sklearn.metrics import fbeta_score, precision_score, recall_score
 from sklearn.ensemble import RandomForestClassifier
 
 from .data import process_data
-from .config import cat_features, label
+from .config import label
 
 
 # Optional: implement hyperparameter tuning.
@@ -24,15 +24,16 @@ def train_model(X_train, y_train):
         Trained machine learning model.
     """
     # read RFC-parameters from config file?
-    rfc_config = []
-    model = RandomForestClassifier(n_estimators=50, max_depth=20, min_samples_split=5) 
+    model = RandomForestClassifier(n_estimators=50,
+                                   max_depth=20,
+                                   min_samples_split=5)
     model.fit(X_train, y_train)
     return model
 
 
 def compute_model_metrics(y, preds):
     """
-    Validates the trained machine learning model using precision, recall, and F1.
+    Validates the trained machine learning model using precision, recall, F1.
 
     Inputs
     ------
@@ -52,10 +53,11 @@ def compute_model_metrics(y, preds):
     return precision, recall, fbeta
 
 
-def compute_model_metrics_for_feature_slice(model, df, categorical_features, label, slice_column, encoder, lb):
+def compute_model_metrics_for_feature_slice(model, df, categorical_features,
+                                            label, slice_column, encoder, lb):
     """Computes metrics for all slices defined by slice column
 
-    This function iterates over all classes in `slice_column` and will output 
+    This function iterates over all classes in `slice_column` and will output
     the metrics for all uniqe column features
 
     Inputs
@@ -77,7 +79,12 @@ def compute_model_metrics_for_feature_slice(model, df, categorical_features, lab
 
     for value in df[slice_column].unique():
         df_temp = df[df[slice_column] == value]
-        X, y, _, _ = process_data(df_temp, categorical_features=categorical_features, label=label, training=False, encoder=encoder, lb=lb)
+        X, y, _, _ = process_data(df_temp,
+                                  categorical_features=categorical_features,
+                                  label=label,
+                                  training=False,
+                                  encoder=encoder,
+                                  lb=lb)
         y_pred = inference(model, X)
         metrics = compute_model_metrics(y, y_pred)
         metric_dict[value] = metrics
@@ -86,8 +93,9 @@ def compute_model_metrics_for_feature_slice(model, df, categorical_features, lab
 
 
 def inference_on_df(model, df, categorical_features, encoder, lb):
-    X, y, _, _ = process_data(df, categorical_features=categorical_features, label=label, training=False,
-                        encoder=encoder, lb=lb)
+    X, y, _, _ = process_data(df, categorical_features=categorical_features,
+                              label=label, training=False,
+                              encoder=encoder, lb=lb)
     predictions = inference(model, X)
     return predictions
 

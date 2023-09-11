@@ -21,11 +21,6 @@ data = {
         }
 
 data_json = json.dumps(data)
-#curl -X 'POST' \
-#  'https://income-prediction-hwg8.onrender.com/inference' \
-#  -H 'accept: application/json' \
-#  -H 'Content-Type: application/json' \
-#  -d data_json
 
 url = 'https://income-prediction-hwg8.onrender.com/inference'
 headers = {'content-type': 'application/json', 'accept': 'application/json'}

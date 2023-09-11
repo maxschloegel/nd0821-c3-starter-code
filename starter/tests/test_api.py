@@ -10,6 +10,7 @@ client = TestClient(app)
 data_path = pathlib.Path("tests/data/test_data.csv")
 df = pd.read_csv(data_path)
 
+
 def test_api_root():
     response = client.get("/")
 
@@ -36,7 +37,6 @@ def test_model_inference_cl0():
         "native-country": "United-States",
         "salary": "<=50K"
         }
-#    df_json = df    
     response = client.post("/inference", json=data_json)
 
     assert response.status_code == 200
@@ -44,7 +44,6 @@ def test_model_inference_cl0():
 
 
 def test_model_inference_cl1():
-#    df_json = df    
     data_json = {
         "age": 80,
         "workclass": "Private",

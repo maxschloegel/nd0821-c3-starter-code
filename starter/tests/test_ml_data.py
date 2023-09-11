@@ -3,9 +3,9 @@ import pathlib
 import numpy as np
 import pandas as pd
 
-from starter.ml import data
 from starter.ml.data import process_data
-from starter.ml.model import load_pkl, inference_on_df, compute_model_metrics_for_feature_slice
+from starter.ml.model import (load_pkl, inference_on_df,
+                              compute_model_metrics_for_feature_slice)
 from starter.ml.config import cat_features, label
 
 data_path = pathlib.Path("tests/data/test_data.csv")
@@ -56,4 +56,4 @@ def test_metrics_for_feature_slices():
                     lb=lb)
 
     assert set(metric_dict.keys()) == set(["Male", "Female"])
-    assert len(metric_dict["Male"]) == 3 
+    assert len(metric_dict["Male"]) == 3
