@@ -124,6 +124,12 @@ def save_model(model, path):
         pickle.dump(model, f)
 
 
+def load_pkl(path):
+    with open(path, "rb") as f:
+        file = pickle.load(f)
+    return file
+
+
 def save_encoder(encoder, path):
     """Save encoder
 

@@ -72,7 +72,10 @@ def process_data(
 
 
 def clean_data(data):
-    print("Not Implemented yet!")
+    """Cleans data
+
+    Currently not implemented yet.
+    """
     return data
 
 

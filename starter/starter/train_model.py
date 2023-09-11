@@ -35,9 +35,9 @@ X_test, y_test, encoder, lb = process_data(
 # Train and save a model.
 model = train_model(X_train, y_train)
 
-print("Train Metrics")
+print(f"Train Metrics - ({len(X_train)} samples used)")
 print(compute_model_metrics(inference(model, X_train), y_train))
-print("Test Metrics")
+print(f"Test Metrics - ({len(X_test)} samples used)")
 print(compute_model_metrics(inference(model, X_test), y_test))
 
 print("Slice Metrics on Test data for Column 'sex'")

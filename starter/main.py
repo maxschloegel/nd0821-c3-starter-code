@@ -16,7 +16,7 @@ app = FastAPI()
 
 class InferenceRequest(BaseModel):
     age: int = Field(example=39)
-    workclass: str = Field(example=" State-gov")
+    workclass: str = Field(example="State-gov")
     fnlgt: int = Field(example=77516)
     education: str = Field(example="Bachelors")
     education_num: int = Field(example=13, alias="education-num")
