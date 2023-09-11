@@ -1,0 +1,22 @@
+|Data                          | Precision | Recall | F1-Score |
+|------------------------------|-----------|--------|----------|
+|Train                         |      0.998|   0.999|     0.999|
+|Test                          |      0.636|   0.732|     0.680|
+|Slice-Sex-Male                |      0.731|   0.642|     0.684|
+|Slice-Sex-Female              |      0.734|   0.597|     0.659|
+|Slice-Education-HS-grad       |      0.622|   0.416|     0.498|
+|Slice-Education-Assoc-voc     |      0.708|   0.590|     0.643|
+|Slice-Education-9th           |      1.000|   0.600|     0.750|
+|Slice-Education-Masters       |      0.815|   0.781|     0.798|
+|Slice-Education-Some-college  |      0.644|   0.518|     0.574|
+|Slice-Education-Bachelors     |      0.769|   0.769|     0.769|
+|Slice-Education-7th-8th       |      0.500|   0.200|     0.286|
+|Slice-Education-10th          |      0.750|   0.250|     0.375|
+|Slice-Education-12th          |      0.000|   0.000|     1.000|
+|Slice-Education-Assoc-acdm    |      0.673|   0.649|     0.661|
+|Slice-Education-Prof-school   |      0.865|   0.975|     0.917|
+|Slice-Education-11th          |      1.000|   0.143|     0.250|
+|Slice-Education-Doctorate     |      0.840|   0.900|     0.869|
+|Slice-Education-5th-6th       |      1.000|   0.000|     0.000|
+|Slice-Education-1st-4th       |      1.000|   0.000|     0.000|
+|Slice-Education-Preschool     |      1.000|   1.000|     1.000|
