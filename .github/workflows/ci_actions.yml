@@ -47,5 +47,4 @@ jobs:
       env:
         deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
       run:
-        echo $github.ref
         curl "$deploy_url"
