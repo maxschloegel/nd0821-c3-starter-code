@@ -5,5 +5,6 @@ setuptools.setup(
     version="0.0.0",
     description="Starter code.",
     author="Student",
+    packages=['starter']
     py_modules=[],
 )
