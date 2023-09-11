@@ -27,5 +27,9 @@ headers = {'content-type': 'application/json', 'accept': 'application/json'}
 
 response = requests.post(url, data=data_json, headers=headers)
 
+
+print(f"Sending Inference Query to Web-App located at \n\t{url}\n")
+print(f"Queried Dataset: {json.dumps(data, indent=4)}\n")
+print("Response:")
 print(f"Status Code: {response.status_code}")
 print(f"Prediction Result: {response.json()}")

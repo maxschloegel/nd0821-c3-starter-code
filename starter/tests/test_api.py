@@ -45,19 +45,19 @@ def test_model_inference_cl0():
 
 def test_model_inference_cl1():
     data_json = {
-        "age": 80,
+        "age": 42,
         "workclass": "Private",
-        "fnlgt": 77516,
-        "education": "Doctorate",
+        "fnlgt": 159449,
+        "education": "Bachelors",
         "education-num": 13,
-        "marital-status": "Never-married",
+        "marital-status": "Married-civ-spouse",
         "occupation": "Exec-managerial",
-        "relationship": "Not-in-family",
+        "relationship": "Husband",
         "race": "White",
         "sex": "Male",
-        "capital-gain": 2174,
+        "capital-gain": 5178,
         "capital-loss": 0,
-        "hours-per-week": 80,
+        "hours-per-week": 40,
         "native-country": "United-States",
         "salary": ">50K"
         }

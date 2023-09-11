@@ -24,9 +24,7 @@ def train_model(X_train, y_train):
         Trained machine learning model.
     """
     # read RFC-parameters from config file?
-    model = RandomForestClassifier(n_estimators=50,
-                                   max_depth=20,
-                                   min_samples_split=5)
+    model = RandomForestClassifier(n_estimators=50)
     model.fit(X_train, y_train)
     return model
 

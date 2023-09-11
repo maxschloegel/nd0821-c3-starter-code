@@ -35,21 +35,50 @@ X_test, y_test, encoder, lb = process_data(
 # Train and save a model.
 model = train_model(X_train, y_train)
 
-print(f"Train Metrics - ({len(X_train)} samples used)")
-print(compute_model_metrics(inference(model, X_train), y_train))
-print(f"Test Metrics - ({len(X_test)} samples used)")
-print(compute_model_metrics(inference(model, X_test), y_test))
+# Computing Metrics
+train_metrics = compute_model_metrics(inference(model, X_train), y_train)
+test_metrics = compute_model_metrics(inference(model, X_test), y_test)
+slice_metrics_sex = compute_model_metrics_for_feature_slice(
+                        model=model,
+                        df=test,
+                        categorical_features=cat_features,
+                        label=label,
+                        slice_column='sex',
+                        encoder=encoder,
+                        lb=lb)
+slice_metrics_education = compute_model_metrics_for_feature_slice(
+                        model=model,
+                        df=test,
+                        categorical_features=cat_features,
+                        label=label,
+                        slice_column='education',
+                        encoder=encoder,
+                        lb=lb)
 
-print("Slice Metrics on Test data for Column 'sex'")
-print(compute_model_metrics_for_feature_slice(
-        model=model,
-        df=test,
-        categorical_features=cat_features,
-        label=label,
-        slice_column='sex',
-        encoder=encoder,
-        lb=lb)
-      )
+
+def create_metrics_table_row(metrics, name):
+    string = (f"|{name: <30}|{metrics[0]:11.3f}|"
+              f"{metrics[1]:8.3f}|{metrics[2]:10.3f}|\n")
+    return string
+
+
+def create_metrics_row_for_slice(metrics, name):
+    slice_metric_string = ""
+    for k, v in metrics.items():
+        slice_metric_string += create_metrics_table_row(v, name+f"-{k}")
+
+    return slice_metric_string
+
+
+with open("slice_output.txt", "w") as f:
+    f.write(f"|{'Data': <30}| Precision | Recall | F1-Score |\n")
+    f.write("|"+30*'-'+"|-----------|--------|----------|\n")
+    f.write(create_metrics_table_row(train_metrics, "Train"))
+    f.write(create_metrics_table_row(test_metrics, "Test"))
+    f.write(create_metrics_row_for_slice(slice_metrics_sex, "Slice-Sex"))
+    f.write(create_metrics_row_for_slice(slice_metrics_education,
+                                         "Slice-Education"))
+
 
 # Save model
 model_path = pathlib.Path("model") / "classifier.pkl"
