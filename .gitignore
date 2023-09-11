@@ -1,6 +1,8 @@
 # Ignore saved models and encoders
 #*.pkl
 
+/.~lock*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

@@ -5,17 +5,17 @@ name: Python package
 
 on:
   push:
-    branches: [ $default-branch ]
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         python-version: ["3.8"]
-
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
@@ -34,7 +34,13 @@ jobs:
       run: |
         # stop the build if there are Python syntax errors or undefined names
         flake8 starter/
+        flake8 tests/
     - name: Test with pytest
       working-directory: ./starter
       run: |
-        pytest
+        pytest tests
+    - name: Deploy to production
+      uses: johnbeynon/render-deploy-action@v0.0.8
+        with:
+          service-id: ${{ secrets.RENDER_SERVICE_ID }}
+          api-key: ${{ secrets.RENDER_API_KEY }}
